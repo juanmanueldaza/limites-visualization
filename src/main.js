@@ -1,10 +1,14 @@
 import p5 from "p5";
+import * as Tone from "tone";
 
 let windowWidth = window.innerWidth;
 let windowHeight = window.innerHeight;
 
 let backgroundColor = 0;
 let lineColor = 255;
+
+const meter = new Tone.Meter();
+const mic = new Tone.UserMedia().connect(meter);
 
 new p5(sketch => {
   sketch.setup = () => {
