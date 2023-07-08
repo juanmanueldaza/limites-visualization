@@ -1,26 +1,10 @@
 import p5 from "p5";
-import * as Tone from "tone";
 
 let windowWidth = window.innerWidth;
 let windowHeight = window.innerHeight;
 
 let backgroundColor = 0;
 let lineColor = 255;
-
-const meter = new Tone.Meter();
-const mic = new Tone.UserMedia().connect(meter);
-mic
-  .open()
-  .then(() => {
-    // promise resolves when input is available
-    console.log("mic open");
-    // print the incoming mic levels in decibels
-    setInterval(() => console.log(meter.getValue()), 100);
-  })
-  .catch(e => {
-    // promise is rejected when the user doesn't have or allow mic access
-    console.log("mic not open");
-  });
 
 new p5(sketch => {
   sketch.setup = () => {
