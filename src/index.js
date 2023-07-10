@@ -1,11 +1,16 @@
 import p5 from "p5";
-import * as Tone from "tone";
+import { Analyser, Destination, Meter, Player } from "tone";
 import { sketchIt } from "./sketch";
 
-const meter = new Tone.Meter();
-const player = new Tone.Player();
-const analyser = new Tone.Analyser();
+const meter = new Meter();
+const player = new Player();
+const analyser = new Analyser();
 
-player.chain(analyser, meter, Tone.Destination);
+const mp3FilePath = "LIMITES1.mp3";
+player.load(mp3FilePath, null, error => {
+  console.error("Failed to load MP3 file:", error);
+});
+
+player.chain(analyser, meter, Destination);
 
 new p5(sketch => sketchIt(sketch, analyser, player));
