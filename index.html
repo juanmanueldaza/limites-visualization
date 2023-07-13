@@ -6,8 +6,10 @@
     <title>Vite App</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <div id="app">
+      <button id="init" class="floating">init()</button>
+    </div>
+    <script type="module" src="/src/index.js"></script>
   </body>
   <style>
     /* Remove alignment arrows */
@@ -25,6 +27,17 @@
 
     canvas {
       display: block;
+    }
+
+    .floating {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </html>
