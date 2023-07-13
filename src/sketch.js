@@ -1,9 +1,10 @@
 import { audioContextStarted as started, config as theConfig } from "./config";
 import { visualize } from "./visualization";
 
-export const sketchIt = (sketch, analyser, player) => {
+export const sketchIt = (sketch, analyserNode, sourceNode) => {
   let audioContextStarted = started();
   let config = theConfig();
+
   sketch.setup = () => {
     sketch.createCanvas(config.windowWidth, config.windowHeight);
     sketch.frameRate(30);
@@ -16,7 +17,9 @@ export const sketchIt = (sketch, analyser, player) => {
 
   sketch.draw = () => {
     sketch.background(config.backgroundColor);
-    const dataArray = analyser.getValue();
+    const dataArray = new Uint8Array(analyserNode.fftSize);
+    analyserNode.getByteTimeDomainData(dataArray);
+
     for (const visualization in config.currentVisualizations) {
       if (config.currentVisualizations[visualization]) {
         visualize(Number(visualization), dataArray, sketch, config);
@@ -29,11 +32,6 @@ export const sketchIt = (sketch, analyser, player) => {
   sketch.windowResized = () => {
     config.windowWidth = window.innerWidth;
     config.windowHeight = window.innerHeight;
-    config.centerX = config.windowWidth / 2;
-    config.centerY = config.windowHeight / 2;
-    config.diagonalLength = Math.sqrt(
-      Math.pow(config.windowWidth, 2) + Math.pow(config.windowHeight, 2)
-    );
     sketch.resizeCanvas(config.windowWidth, config.windowHeight);
   };
 
@@ -41,14 +39,14 @@ export const sketchIt = (sketch, analyser, player) => {
     if (["1", "2", "3", "4"].includes(sketch.key)) {
       const key = Number(sketch.key);
       config.currentVisualizations[key] = !config.currentVisualizations[key];
-      console.log(config.currentVisualizations);
+      console.log("config.currentVisualizations", config.currentVisualizations);
     }
   };
 
   const startAudioContext = () => {
-    if (!audioContextStarted && player.loaded) {
+    if (!audioContextStarted && sourceNode.buffer) {
       audioContextStarted = true;
-      player.start();
+      sourceNode.start();
       sketch.loop();
     }
   };

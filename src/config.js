@@ -16,7 +16,7 @@ export let config = () => {
     maxSize: 200,
     centerX: window.innerWidth / 2,
     centerY: window.innerHeight / 2,
-    scaleFactor: 200,
+    scaleFactor: 20,
     diagonalLength: Math.sqrt(
       Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2)
     ),

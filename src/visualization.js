@@ -10,6 +10,14 @@ export const visualize = (visualizationMode, dataArray, sketch, config) => {
     diagonalLength,
   } = config;
 
+  console.log(
+    "from Visualizations",
+    visualizationMode,
+    dataArray,
+    sketch,
+    config
+  );
+
   const frameCountScaled = sketch.frameCount * 0.02;
 
   for (let i = 0; i < windowWidth / scaleFactor; i++) {
@@ -35,8 +43,6 @@ export const visualize = (visualizationMode, dataArray, sketch, config) => {
       case 2:
         x1 = i * scaleFactor + offset * dataValue + centerX;
         sketch.stroke(lineColor);
-        // console.log(sketch.line(x1, 0, x1, windowHeight));
-        console.log(lineColor);
         break;
       case 3:
         x1 = windowWidth - i * scaleFactor + offset * dataValue + centerX;
