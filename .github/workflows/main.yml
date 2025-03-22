@@ -39,6 +39,11 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build/ # Asegúrate de que esta ruta sea válida
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
