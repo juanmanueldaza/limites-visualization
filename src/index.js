@@ -5,7 +5,7 @@ const init = async () => {
   console.log("Starting Visualizer... Please wait!");
 
   const audioContext = new AudioContext();
-  const mp3FilePath = "LIMITES1.mp3";
+  const mp3FilePath = "/LIMITES1.mp3"; // Cambiar la ruta para que apunte al directorio public
 
   try {
     const response = await fetch(mp3FilePath);

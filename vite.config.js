@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "/limites-visualization/",
+  base: "/", // Cambiar la base a raíz
 });
